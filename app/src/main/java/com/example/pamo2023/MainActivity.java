@@ -2,6 +2,7 @@ package com.example.pamo2023;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,32 +11,40 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button bmi;
+    Button caloriesPerDay;
+    Button culinaryRecipes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editTextWeight = findViewById(R.id.weight);
-        EditText editTextHeight = findViewById(R.id.height);
-        Button button = findViewById(R.id.btnSubmit);
-        Button resetButton = findViewById(R.id.btnReset);
-        TextView textView = findViewById(R.id.result);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        bmi = (Button) findViewById(R.id.bmi);
+        caloriesPerDay = (Button) findViewById(R.id.caloriesPerDay);
+        culinaryRecipes = (Button) findViewById(R.id.culinaryRecipes);
+
+        bmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float height = Float.parseFloat(String.valueOf(editTextHeight.getText())) / 100;
-                float weight = Float.parseFloat(String.valueOf(editTextWeight.getText()));
-                float bmi = weight / (height * height);
-                textView.setText(String.valueOf(bmi));
+                Intent intent = new Intent(MainActivity.this, BmiActivity.class);
+                startActivity(intent);
             }
         });
 
-        resetButton.setOnClickListener(new View.OnClickListener() {
+        caloriesPerDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editTextWeight.setText("");
-                editTextHeight.setText("");
-                textView.setText("");
+                Intent intent = new Intent(MainActivity.this, Calories_per_der.class);
+                startActivity(intent);
+            }
+        });
+
+        culinaryRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Culinary_recipes.class);
+                startActivity(intent);
             }
         });
     }
