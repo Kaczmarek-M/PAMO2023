@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAMO2023">
         <activity
+            android:name=".Calories_per_der"
+            android:exported="false" />
+        <activity
+            android:name=".Culinary_recipes"
+            android:exported="false" />
+        <activity
+            android:name=".BmiActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
