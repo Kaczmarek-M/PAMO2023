@@ -42,4 +42,12 @@
         android:textSize="20dp"
         android:text="food quiz"></Button>
 
+    <Button
+        android:id="@+id/chartBmi"
+        android:backgroundTint="#256200EE"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:textSize="20dp"
+        android:text="bmi chart"></Button>
+
 </LinearLayout>

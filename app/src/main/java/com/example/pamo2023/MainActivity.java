@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button caloriesPerDay;
     Button culinaryRecipes;
     Button quizGame;
+    Button bmiChart;
 
 
 
@@ -27,11 +28,20 @@ public class MainActivity extends AppCompatActivity {
         caloriesPerDay = (Button) findViewById(R.id.caloriesPerDay);
         culinaryRecipes = (Button) findViewById(R.id.culinaryRecipes);
         quizGame = (Button) findViewById(R.id.quiz);
+        bmiChart = (Button) findViewById(R.id.chartBmi);
 
         bmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, BmiActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bmiChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChartActivity.class);
                 startActivity(intent);
             }
         });
