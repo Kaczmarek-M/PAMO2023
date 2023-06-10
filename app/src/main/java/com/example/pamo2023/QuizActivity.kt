@@ -1,97 +1,103 @@
-package com.example.pamo2023;
+package com.example.pamo2023
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import android.text.TextUtils
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+class CaloriesPerDer : AppCompatActivity() {
+    private var back: Button? = null
+    private var btn: Button? = null
+    private var height: EditText? = null
+    private var weight: EditText? = null
+    private var age: EditText? = null
+    private var result: TextView? = null
+    private var malelayout: LinearLayout? = null
+    private var femalelayout: LinearLayout? = null
+    private var mimg: ImageView? = null
+    private var fimg: ImageView? = null
+    private var h = 0.0
+    private var w = 0.0
+    private var a = 0.0
+    private var bmr = 0.0
+    private var user = "0"
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_calories_per_der)
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
+        btn = findViewById(R.id.btncal)
+        height = findViewById(R.id.heighttxt)
+        weight = findViewById(R.id.weighttxt)
+        age = findViewById(R.id.agetxt)
+        result = findViewById(R.id.result)
+        malelayout = findViewById(R.id.male)
+        femalelayout = findViewById(R.id.female)
+        mimg = findViewById(R.id.maleimg)
+        fimg = findViewById(R.id.femaleimg)
 
-    private Button yesBtn;
-    private Button noBtn;
-    private TextView question;
-    private ImageView image;
+        malelayout?.setOnClickListener {
+            mimg?.setColorFilter(resources.getColor(R.color.white))
+            fimg?.setColorFilter(resources.getColor(R.color.black))
+            user = "Male"
+        }
 
-    Button back;
+        femalelayout?.setOnClickListener {
+            fimg?.setColorFilter(resources.getColor(R.color.white))
+            mimg?.setColorFilter(resources.getColor(R.color.black))
+            user = "Female"
+        }
 
-    private int currentIndex = 0;
-    private Integer images[] = {R.mipmap.coffee, R.mipmap.sugar, R.mipmap.cucumber, R.mipmap.potatoes,
-            R.mipmap.honey, R.mipmap.gluten};
-    private Question[] questionBank = new Question[]{
-            new Question(R.string.my_question1, true),
-            new Question(R.string.my_question2, true),
-            new Question(R.string.my_question3, true),
-            new Question(R.string.my_question4, false),
-            new Question(R.string.my_question5, false),
-            new Question(R.string.my_question6, false),
+        btn?.setOnClickListener {
+            val str1 = height?.text.toString()
+            val str2 = weight?.text.toString()
+            val str3 = age?.text.toString()
 
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
-
-        yesBtn = findViewById(R.id.yesBtn);
-        noBtn = findViewById(R.id.noBtn);
-        question = findViewById(R.id.txtQue);
-        image = findViewById(R.id.questionImage);
-
-        image.setImageResource(images[currentIndex]);
-        yesBtn.setOnClickListener(this::onClick);
-        noBtn.setOnClickListener(this::onClick);
-
-        back = (Button) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(QuizActivity.this, MainActivity.class);
-                startActivity(intent);
-                correctCount = 0;
+            if (user == "0") {
+                Toast.makeText(this@CaloriesPerDer, "Select your gender", Toast.LENGTH_SHORT).show()
+            } else if (TextUtils.isEmpty(str1)) {
+                height?.setError("Select Height")
+                height?.requestFocus()
+                return@setOnClickListener
+            } else if (TextUtils.isEmpty(str2)) {
+                weight?.setError("Select Weight")
+                weight?.requestFocus()
+                return@setOnClickListener
+            } else if (TextUtils.isEmpty(str3)) {
+                age?.setError("Select Age")
+                age?.requestFocus()
+                return@setOnClickListener
+            } else {
+                calculate()
             }
-        });
+        }
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.noBtn:
-                checkAnswers(false);
-                currentIndex++;
-                updateQuestion();
-                break;
-            case R.id.yesBtn:
-                checkAnswers(true);
-                currentIndex++;
-                updateQuestion();
-                break;
+        back = findViewById(R.id.back) as Button
+        back?.setOnClickListener {
+            val intent = Intent(this@CaloriesPerDer, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    private void updateQuestion(){
-        if(currentIndex<questionBank.length){
-            question.setText(questionBank[currentIndex].getAnsID());
-            image.setImageResource(images[currentIndex]);
-        }else {
-            question.setText("Total correct answer: "+correctCount);
-            yesBtn.setVisibility(View.GONE);
-            noBtn.setVisibility(View.GONE);
-            image.setVisibility(View.GONE);
-        }
-    }
+    private fun calculate() {
+        h = height?.text.toString().toDouble()
+        w = weight?.text.toString().toDouble()
+        a = age?.text.toString().toDouble()
 
-    private static int correctCount=0;
-    private void checkAnswers(boolean userAnswers){
-        boolean isTrue = questionBank[currentIndex].isAns();
-        if(userAnswers==isTrue){
-            correctCount++;
+        if (user == "Male") {
+            bmr = 10 * w + 6.25 * h - 5 * a + 5
+            result?.text = bmr.toString()
+        }
+
+        if (user == "Female") {
+            bmr = 10 * w + 6.25 * h - 5 * a + 161
+            result?.text = bmr.toString()
         }
     }
 }

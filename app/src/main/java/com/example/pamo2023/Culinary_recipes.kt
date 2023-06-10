@@ -1,56 +1,35 @@
-package com.example.pamo2023;
+package com.example.pamo2023
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Culinary_recipes extends AppCompatActivity {
-
-    Button back;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_culinary_recipes);
-
-        findViewById(R.id.firstRec).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firstRecipe("https://recipes.net/main-dish/vegetables/asparagus-with-sherry-and-bacon-vinaigrette-recipe/#wprm-recipe-container-261");
-            }
-        });
-
-        findViewById(R.id.secondRec).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                secondRecipe("https://recipes.net/main-dish/pasta/ravioli-alfredo-with-herbes-de-provence-recipe");
-            }
-        });
-
-        back = (Button) findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Culinary_recipes.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
+class Culinary_recipes : AppCompatActivity() {
+    var back: Button? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_culinary_recipes)
+        findViewById<View>(R.id.firstRec).setOnClickListener { firstRecipe("https://recipes.net/main-dish/vegetables/asparagus-with-sherry-and-bacon-vinaigrette-recipe/#wprm-recipe-container-261") }
+        findViewById<View>(R.id.secondRec).setOnClickListener { secondRecipe("https://recipes.net/main-dish/pasta/ravioli-alfredo-with-herbes-de-provence-recipe") }
+        back = findViewById<View>(R.id.back) as Button
+        back!!.setOnClickListener {
+            val intent = Intent(this@Culinary_recipes, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
-    public void firstRecipe (String url){
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
+    fun firstRecipe(url: String?) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
-    public void secondRecipe (String url){
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
+    fun secondRecipe(url: String?) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }

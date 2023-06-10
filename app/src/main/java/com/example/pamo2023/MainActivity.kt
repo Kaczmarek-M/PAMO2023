@@ -1,73 +1,44 @@
-package com.example.pamo2023;
+package com.example.pamo2023
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-public class MainActivity extends AppCompatActivity {
-
-    Button bmi;
-    Button caloriesPerDay;
-    Button culinaryRecipes;
-    Button quizGame;
-    Button bmiChart;
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        bmi = (Button) findViewById(R.id.bmi);
-        caloriesPerDay = (Button) findViewById(R.id.caloriesPerDay);
-        culinaryRecipes = (Button) findViewById(R.id.culinaryRecipes);
-        quizGame = (Button) findViewById(R.id.quiz);
-        bmiChart = (Button) findViewById(R.id.chartBmi);
-
-        bmi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BmiActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        bmiChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ChartActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        caloriesPerDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Calories_per_der.class);
-                startActivity(intent);
-            }
-        });
-
-        culinaryRecipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Culinary_recipes.class);
-                startActivity(intent);
-            }
-        });
-
-        quizGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-                startActivity(intent);
-            }
-        });
+class MainActivity : AppCompatActivity() {
+    var bmi: Button? = null
+    var caloriesPerDay: Button? = null
+    var culinaryRecipes: Button? = null
+    var quizGame: Button? = null
+    var bmiChart: Button? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        bmi = findViewById<View>(R.id.bmi) as Button
+        caloriesPerDay = findViewById<View>(R.id.caloriesPerDay) as Button
+        culinaryRecipes = findViewById<View>(R.id.culinaryRecipes) as Button
+        quizGame = findViewById<View>(R.id.quiz) as Button
+        bmiChart = findViewById<View>(R.id.chartBmi) as Button
+        bmi!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, BmiActivity::class.java)
+            startActivity(intent)
+        }
+        bmiChart!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, ChartActivity::class.java)
+            startActivity(intent)
+        }
+        caloriesPerDay!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, Calories_per_der::class.java)
+            startActivity(intent)
+        }
+        culinaryRecipes!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, Culinary_recipes::class.java)
+            startActivity(intent)
+        }
+        quizGame!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, QuizActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
