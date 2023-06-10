@@ -14,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
     Button bmi;
     Button caloriesPerDay;
     Button culinaryRecipes;
+    Button quizGame;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         bmi = (Button) findViewById(R.id.bmi);
         caloriesPerDay = (Button) findViewById(R.id.caloriesPerDay);
         culinaryRecipes = (Button) findViewById(R.id.culinaryRecipes);
+        quizGame = (Button) findViewById(R.id.quiz);
 
         bmi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Culinary_recipes.class);
+                startActivity(intent);
+            }
+        });
+
+        quizGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, QuizActivity.class);
                 startActivity(intent);
             }
         });

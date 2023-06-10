@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PAMO2023</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="my_question1">Does Coffee Cause Magnesium Deficiency?</string>
+    <string name="my_question2">Is brown sugar healthier than white?</string>
+    <string name="my_question3">Does the combination of cucumbers and tomatoes in one dish cause them to lose their nutritional value - especially vitamin C?</string>
+    <string name="my_question4">Are potatoes fattening?</string>
+    <string name="my_question5">Is sugar healthier than honey?</string>
+    <string name="my_question6">Is gluten healthy?</string>
 </resources>

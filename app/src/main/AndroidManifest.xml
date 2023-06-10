@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PAMO2023">
         <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".Calories_per_der"
             android:exported="false" />
         <activity
